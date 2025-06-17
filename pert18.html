@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Pendaftaran Sederhana</title>
+  <style>
+    body {
+      background-color: #d0e7f9;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .kotak {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center; /* ini untuk tulisan ke tengah */
+    }
+
+    input {
+      width: 90%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #pesan {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kotak">
+    <h2>Form Pendaftaran</h2>
+
+    <form onsubmit="return validasiForm()">
+      <input type="text" id="nama" placeholder="Nama"><br>
+      <input type="text" id="email" placeholder="Email"><br>
+      <input type="password" id="password" placeholder="Password"><br>
+      <input type="number" id="usia" placeholder="Usia"><br>
+      <input type="submit" value="Daftar">
+    </form>
+
+    <p id="pesan"></p>
+  </div>
+
+  <script>
+    function validasiForm() {
+      var nama = document.getElementById("nama").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var usia = document.getElementById("usia").value;
+
+      var pesan = "";
+
+      if (nama.length < 3) {
+        pesan = "Nama minimal 3 huruf.";
+      } else if (!email.includes("@")) {
+        pesan = "Email tidak valid.";
+      } else if (password.length < 6) {
+        pesan = "Password minimal 6 karakter.";
+      } else if (usia === "" || usia < 17) {
+        pesan = "Usia minimal 17 tahun.";
+      } else {
+        pesan = "✅ Data valid, silakan daftar!";
+        document.getElementById("pesan").style.color = "green";
+        document.getElementById("pesan").innerText = pesan;
+        return false;
+      }
+
+      document.getElementById("pesan").style.color = "red";
+      document.getElementById("pesan").innerText = pesan;
+      return false;
+    }
+  </script>
+
+</body>
+</html>
